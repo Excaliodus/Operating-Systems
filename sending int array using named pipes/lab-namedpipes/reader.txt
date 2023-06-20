@@ -1,0 +1,51 @@
+#include <iostream>
+#include<stdio.h>
+#include <string.h>
+#include<string>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include<fcntl.h>
+#include <errno.h>
+#include<fstream>
+
+using namespace std;
+void checkk(int num)
+{
+int n=num;
+int remainder,reversed=0;
+int original=num;
+while(n!=0)
+{
+remainder=n%10;
+reversed=reversed*10+remainder;
+n/=10;
+}
+if(original==reversed)
+cout<<original<<" ";
+return;
+}
+int main()
+{
+int arr1[5]={0};
+int n=5;
+int ch=3;
+int res;
+
+while(ch!=0)
+ {  
+res=open("fifo1",O_RDONLY);
+if (read(res, &arr1, sizeof(int) * n) <0)
+         return 6; 
+cout<<"palindrome numbers"<<endl;
+ for(int i=0;i<5;i++)
+ {
+    checkk(arr1[i]);
+  }
+cout<<endl;
+ch--;
+}
+cout<<"recieving done"<<endl;
+return 0;
+}
